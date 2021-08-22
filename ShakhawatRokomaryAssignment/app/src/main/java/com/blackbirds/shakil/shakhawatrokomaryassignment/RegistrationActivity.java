@@ -42,9 +42,9 @@ public class RegistrationActivity extends AppCompatActivity {
         String text = "<font color=#afafaf>Already have an account? </font> <font color=#32be4a>Sign In</font>";
         txtHaveAccount.setText(Html.fromHtml(text));
 
-        /*if (!PreferenceHelper.retriveData(this, Common.USER_EMAIL).isEmpty()){
+        if (!PreferenceHelper.retriveData(this, Common.USER_EMAIL).isEmpty()){
             startActivity(new Intent(this, MainActivity.class));
-        }*/
+        }
 
         txtHaveAccount.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
@@ -68,9 +68,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
         registrationViewModel.registrationResponse(registrationRequest).observe(this, registrationResponse -> {
             if (registrationResponse != null){
-                /*PreferenceHelper.insertData(this, Common.USER_EMAIL, registrationRequest.getEmail());
+                PreferenceHelper.insertData(this, Common.USER_EMAIL, registrationRequest.getEmail());
                 PreferenceHelper.insertData(this, Common.USER_NAME, registrationRequest.getUsername());
-                PreferenceHelper.insertData(this, Common.USER_PASSWORD, registrationRequest.getPassword());*/
+                PreferenceHelper.insertData(this, Common.USER_PASSWORD, registrationRequest.getPassword());
 
                 startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(RegistrationActivity.this, "Registration Success!!", Toast.LENGTH_SHORT).show();
