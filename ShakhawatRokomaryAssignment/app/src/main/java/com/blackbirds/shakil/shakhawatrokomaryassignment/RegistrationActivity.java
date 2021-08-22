@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackbirds.shakil.shakhawatrokomaryassignment.Common.Common;
@@ -19,6 +21,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     TextInputEditText edtUserName, edtEmail, edtPassword;
     AppCompatButton btnSignUp;
+
+    TextView txtHaveAccount;
 
     RegistrationViewModel registrationViewModel;
     private String userEmail, userName, userPassword;
@@ -33,9 +37,18 @@ public class RegistrationActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
 
+        txtHaveAccount = findViewById(R.id.txtHaveAccount);
+
+        String text = "<font color=#afafaf>Already have an account? </font> <font color=#32be4a>Sign In</font>";
+        txtHaveAccount.setText(Html.fromHtml(text));
+
         /*if (!PreferenceHelper.retriveData(this, Common.USER_EMAIL).isEmpty()){
             startActivity(new Intent(this, MainActivity.class));
         }*/
+
+        txtHaveAccount.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
 
         btnSignUp.setOnClickListener(v -> {
             userRegistration();
@@ -60,10 +73,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 PreferenceHelper.insertData(this, Common.USER_PASSWORD, registrationRequest.getPassword());*/
 
                 startActivity(new Intent(this, MainActivity.class));
-                Toast.makeText(RegistrationActivity.this, "Login Success!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationActivity.this, "Registration Success!!", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(RegistrationActivity.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationActivity.this, "Registration Failed!!", Toast.LENGTH_SHORT).show();
             }
         });
     }

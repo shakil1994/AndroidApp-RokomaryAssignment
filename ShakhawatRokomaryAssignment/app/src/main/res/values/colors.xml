@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_color">#1A5AA9</color>
     <color name="button_color">#32be4a</color>
+    <color name="gray">#cccccc</color>
+    <color name="dark_green">#3ba03d</color>
+    <color name="edit_text_color">#f7f5f5</color>
 </resources>
