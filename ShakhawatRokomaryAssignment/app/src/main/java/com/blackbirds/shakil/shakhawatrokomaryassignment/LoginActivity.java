@@ -51,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        LoginRequest loginRequest = new LoginRequest();
+        startActivity(new Intent(this, MainActivity.class));
+        /*LoginRequest loginRequest = new LoginRequest();
         loginViewModel.loginResponse(loginRequest).observe(this,loginResponse -> {
             if (loginResponse!=null){
                 PreferenceHelper.insertData(this, Common.USER_TOKEN,loginResponse.getAccess());
@@ -60,6 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             }else {
                 Toast.makeText(LoginActivity.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
