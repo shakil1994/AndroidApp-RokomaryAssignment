@@ -1,6 +1,7 @@
 package com.blackbirds.shakil.shakhawatrokomaryassignment.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blackbirds.shakil.shakhawatrokomaryassignment.BookDetailsActivity;
+import com.blackbirds.shakil.shakhawatrokomaryassignment.Interface.IRecyclerClickListener;
 import com.blackbirds.shakil.shakhawatrokomaryassignment.Model.BookDetails;
 import com.blackbirds.shakil.shakhawatrokomaryassignment.R;
 
@@ -37,6 +40,12 @@ public class NewArrivalBookListAdapter extends RecyclerView.Adapter<NewArrivalBo
     @Override
     public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, int position) {
         //Picasso.get().load(bookDetailsList.get(position).getImage_path()).into(holder.imgBook);
+        holder.setListener((view, pos) -> {
+            Intent intent = new Intent(context, BookDetailsActivity.class);
+//            intent.putExtra("PK", bookDetailsList.get(position).getPk());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -44,14 +53,27 @@ public class NewArrivalBookListAdapter extends RecyclerView.Adapter<NewArrivalBo
         return bookDetailsList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imgBook;
+
+        private IRecyclerClickListener listener;
+
+        public void setListener(IRecyclerClickListener listener) {
+            this.listener = listener;
+        }
 
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             imgBook = itemView.findViewById(R.id.imgBook);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClickListener(v, getAdapterPosition());
         }
     }
 }
